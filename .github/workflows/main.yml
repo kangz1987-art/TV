@@ -33,7 +33,7 @@ jobs:
       - name: Download Official Apktool JAR
         run: |
           set -euo pipefail
-          wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.12.0/apktool_2.12.0.jar -O /tmp/apktool.jar
+          wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -O /tmp/apktool.jar
           chmod +x /tmp/apktool.jar
           java -jar /tmp/apktool.jar version
 
@@ -47,8 +47,8 @@ jobs:
             --output "$RUNNER_TEMP/fongmi-official-583/mobile-arm64_v8a.apk"
           ls -lh "$RUNNER_TEMP/fongmi-official-583/mobile-arm64_v8a.apk"
           if [ ! -d "decoded_dir" ]; then
-            echo "Decoding downloaded APK -> decoded_dir"
-            java -jar /tmp/apktool.jar d "$RUNNER_TEMP/fongmi-official-583/mobile-arm64_v8a.apk" -o decoded_dir
+            echo "Decoding downloaded APK (no resources) -> decoded_dir"
+            java -jar /tmp/apktool.jar d -r "$RUNNER_TEMP/fongmi-official-583/mobile-arm64_v8a.apk" -o decoded_dir
           else
             echo "decoded_dir already exists, skipping decode."
           fi
